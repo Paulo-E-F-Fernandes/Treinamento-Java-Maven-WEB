@@ -1,0 +1,46 @@
+* Como fazer o maven distinguir o escopo em que deve ser utilizado os plugins?
+	- No pom.xml podemos informar qual é o escopo de cada dependência, sendo que se não 
+		informarmos nenhum escopo, o maven utiliza como padrão o escopo "compile".
+	
+* Escopos.
+	- "compile" é utilizado em todas as fases do build e em produção, ou seja, se outra biblioteca
+		depender do meu projeto, ela também dependerá das minhas dependências. Quando for colocado 
+		em produção está biblioteca de que o meu projeto depende também deve ser colocada junta no
+		ambiente de produção.
+	- "test" é escopo que indica que a dependência será utilizada apenas para compilar e executar 
+		os testes.
+	- "runtime" é o escopo onde a biblioteca não é necessária para compilar, mas é necessário para 
+		executar. Ao colocar o escopo runtime em uma dependência, a mesma se torna desnecessária 
+		para realizar a compilação, mas necessária para executar o programa.
+	- "provided" é o escopo que indica que a biblioteca é necessária, mas em tempo de execução ela
+		será fornecida por alguém. Não precisa colocar a biblioteca em runtime, só precisa para 
+		compilar. è uma dependência para compilar, mas não para executar. EXEMPLO deste escopo é a
+		servlet API que é necessária para compilar as servlets criadas no projeto, mas em produção
+		a API é fornecida pelo servlet container.
+	- "system" é o escopo em que o jar está localizado no diretório indicado na tag <systemPath>,
+		 desta maneira conseguimos colocar os jars que não estão sendo controlados pelo maven, mas
+		 isso ocasiona a desvantagem do maven não controlar as dependências desta dependência, pois
+		 o jar foi enfiado no projeto e não gerenciado pelo maven. DEVE SER EVITADO AO MÁXIMO 
+		 UTILIZAR O ESCOPO SYSTEM.
+		- EX.:
+			...
+			<dependency>
+		    	<groupId>org.apache.httpcomponents</groupId>
+		    	<artifactId>httpclient</artifactId>
+		    	<version>4.2.3</version>
+				<scope>system</scope>
+				<systemPath>xpto/httpclient.jar</systemPath>
+		    </dependency>
+			...
+
+* Para colocarmos dependências de bibliotecas criado por nós mesmos necessitamos executar o comando 
+	"mvn install" no projeto que será feita o jar que será dependência, desta forma o .jar gerado 
+	será instalado em nosso repositório local, que fica em ".m2/repository/br/com/treinamento/maven". 
+	Após a instalação de nosso .jar no repositório local, podemos executar o comando 
+	"mvn eclipse:eclipse" para baixar as dependências e configurar o base path do projeto.
+	
+	- O maven identifica que o projeto que colocamos como dependência está aberto no eclipse e desta
+		forma ele não coloca o .jar como dependência e sim o projeto que está aberto no eclipse, 
+		assim qualquer alteração no projeto é identificado pelo maven que reflete estas alterações 
+		no projeto que depende do .jar.  
+	

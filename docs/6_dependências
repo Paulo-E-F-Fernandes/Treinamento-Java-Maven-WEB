@@ -1,0 +1,48 @@
+* Quando adicionamos ums dependência de um outro projeto nosso de maneira automática o maven
+	adiciona as dependências deste projeto.
+	
+	- EX.: Adicionando uma outra biblioteca no projeto Treinamento-Java-Maven, por exemplo, a
+		"httpclient", todo projeto que terá o projeto Treinamento-Java-Maven como dependência terá
+		como dependência o "httpclient". Após adicionar a dependência, executar o "mvn install" no
+		projeto Treinamento-Java-Maven e depois no projeto Treinamento-Java-Maven-WEB executar o
+		comando "mvn eclipse:eclipse"
+		
+	- Para informar que uma dependência é opcional, utilizamos o tag <optional>true</optional> dentro
+		de <dependency>. Então para que a dependência de um projeto que seja dependência do nosso
+		projeto é necessário o uso da tag <optional> com o valor true no pom.xml do projeto que 
+		dependemos. Desta
+		- EX.: 
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+    			<artifactId>httpclient</artifactId>
+    			<version>4.2.3</version>
+    			<optional>true</optional>
+			</dependency>
+			
+		- Desta forma que for depender do nosso projeto dependerá apenas da parte principal do nosso
+			projeto e se ele quiser colocará no seu projeto a dependência para as dependência que o
+			nosso projeto possui.
+			
+	- Quando temos uma biblioteca que é necessária para uma das dependências de nosso projeto, mas 
+		não é necessária para o nosso projeto. Quem criou a biblioteca acredito que a dependência
+		seria obrigatório e não colocou como <optional>, mas para o nosso projeto não é necessário.
+		Nestes casos podemos criar algumas exclusões. As exclusões são criadas da seguinte maneira:
+		- No pom.xml do nosso projeto colocamos as tags <exclusions> e <exclusion>
+			...
+			<dependency>
+				<groupId>br.com.treinamento.maven</groupId>
+				<artifactId>Treinamento-Java-Maven</artifactId>
+				<version>1.0-SNAPSHOT</version>
+    			<exclusions>
+	    			<exclusion>
+	    				<groupId>org.apache.httpcomponents</groupId>
+    					<artifactId>httpclient</artifactId>
+	    			</exclusion>
+    			</exclusions>
+			</dependency>
+			...
+			
+			- Ou seja, eu quero o "Treinamento-Java-Maven" no meu projeto, mas não quero o jar do 
+			"httpclient" no meu projeto. Um caso comum do uso de exclusões é quando a dependência 
+			entra em conflito com alguma outra biblioteca e para excluir na mão está dependência é
+			utilizado a tag <exclusions>.

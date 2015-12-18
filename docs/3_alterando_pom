@@ -1,0 +1,9 @@
+* Colocamos a depedência do VRaptor para falicitar a estrutura do MVC. 
+	<dependency>
+		<groupId>br.com.caelum</groupId>
+		<artifactId>vraptor</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	
+* SEMPRE após a adição de uma depedência precisamos executar o comando "mvn eclipse:eclipse"
+   para que o Maven baixe a dependência e configurar o classpath. 

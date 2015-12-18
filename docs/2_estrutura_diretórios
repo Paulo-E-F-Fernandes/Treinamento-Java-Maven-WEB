@@ -1,0 +1,11 @@
+* O maven cria o projeto com a seguinte estrutura de diretórios:
+    - src
+      - main
+        - resources (arquivos de configuração, por exemplo, internacionalização [message.properties])
+        - webapp (aplicação web pra valer)
+          - WEB-INF
+            - web.xml
+        - java (Por padrão o maven não cria o diretório "java" no "src", então criamos e depois 
+                 executamos o "mvn eclipse:eclipse". Só por existir o diretório "java" o 
+                 "mvn eclipse:eclipse" configura ele com um diretório de código Java)
+    - target

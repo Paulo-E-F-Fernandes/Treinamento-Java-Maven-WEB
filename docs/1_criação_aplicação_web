@@ -1,0 +1,21 @@
+* Quando o nosso projeto não é distribuido por um único jar, como por exemplo, uma biblioteca ou 
+   uma aplicação cliente simples, se tiveremos uma aplicação web e queremos gerar um arquivo .war,
+   precisaremos criar uma aplicação web no maven e isso é feito alterando o "-DarchetypeArtifactId"
+   de "maven-archetype-quickstart" para "maven-archetype-webapp".
+   
+   EX.: mvn archetype:generate 
+        -DgroupId=br.com.treinamento.maven 
+        -DartifactId=Treinamento-Java-Maven-WEB 
+        -DinteractiveMode=false 
+        -DarchetypeArtifactId=maven-archetype-webapp
+    
+-------------------------------------------------------------------------------------------------    
+* Após a geração do projeto é necessário configurar o eclipse, mas como a parte web do eclipse
+   é feita através de um plugin, o wtp. Então o comando para a configuração será:
+    - mvn eclipse:eclipse -Dwtpversion=2.0
+      -Dwtpversion com esse parâmetro o maven utilizará o wtp  
+  
+-------------------------------------------------------------------------------------------------
+* Caso após a importação o eclipse reclamar que o java compiler não estiver na mesma versão:
+    - ir em "Propriedades do projeto > Project Facets" e alterar a versão do Java para a mesma
+       do compilador.

@@ -1,0 +1,42 @@
+* Para executar a aplicação web pelo maven devemos, pelo terminal, entrar no diretório do 
+projeto e rodar um servidor web, por examplo o jetty, mas antes de rodar o jetty é necessário
+configurar o plugin do jetty.
+   - Configurar o plugin
+      - No pom.xml:
+         - Adicionar o plugin dentro da tag build
+            <build>
+               <finalName>Treinamento-Java-Maven-WEB</finalName>
+               <plugins>
+                  <plugin>
+                     <groupId>org.mortbay.jetty</groupId>
+                     <artifactId>jetty-maven-plugin</artifactId>
+                  </plugin>
+               </plugins>
+            </build>
+            
+   - Executar o comando
+      - mvn jetty:run
+      
+* Podemos colocar no pom.xml uma configuração para que o jetty verifique se houve alterações nos
+fontes e exibir as páginas atualizadas.
+   - Colocar no pom.xml, abaixo do <artifactId>
+      ...
+      <artifactId>jetty-maven-plugin</artifactId>
+      <configuration>
+         <scanIntervalSeconds>10</scanIntervalSeconds>
+      </configuration>
+      ...
+      
+* Podemos também configurar a porta do servidor, dentro da tag <configuration> adicionamos a 
+configuração para alterar a porta específica.
+   - Colocar no pom.xml, dentro de <configuration>
+      ...
+      <configuration>
+         <connectors>
+            <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+               <port>9090</port>
+               <maxIdleTime>6000</maxIdleTime>
+            </connector>
+         </connectors>
+      </configuration>
+      ...
